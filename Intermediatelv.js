@@ -45,3 +45,18 @@ function uniteUnique3() {
 console.log(uniteUnique3([1, 3, 2], [5, 2, 1, 4], [2, 1]));
 
 //*Convert HTML Entities
+function convertHTML(str) {
+  // Use Object Lookup to declare as many HTML entities as needed.
+  const htmlEntities = {
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&apos;",
+  };
+  // Using a regex, replace characters with it's corresponding html entity
+  return str.replace(/([&<>\"'])/g, (match) => htmlEntities[match]);
+}
+
+// test here
+console.log(convertHTML("Dolce & Gabbana"));
