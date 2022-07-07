@@ -13,6 +13,7 @@ function fearNotLetter(str) {
 console.log(fearNotLetter("abce"));
 
 //*Sorted Union
+/*Write a function that takes two or more arrays and returns a new array of unique values in the order of the original provided arrays.*/
 function uniteUnique(...arr) {
   //   const array = [...arguments]; //otra forma de hacer spread de los argumentos en el caso de que no haga spread en la funcion
   //   console.log(array);
@@ -31,7 +32,16 @@ function uniteUnique(...arr) {
 }
 console.log(uniteUnique([1, 2, 3], [5, 2, 1]));
 
-const uniteUnique2 = (...arr) => [...new Set(arr.flat())];
+//?Then the spread operator in ...new Set() just converts this back into an array  🔥
+const uniteUnique2 = (...arr) => [...new Set(arr.flat())]; //Set elimina los valores duplicados y flat() convierte el array en un array de un solo nivel
 console.log(uniteUnique([1, 2, 3], [5, 2, 1]));
+
+function uniteUnique3() {
+  return [...arguments]
+    .flat()
+    .filter((item, ind, arr) => arr.indexOf(item) === ind); //filter() elimina los valores duplicados y flat() convierte el array en un array de un solo nivel
+}
+
+console.log(uniteUnique3([1, 3, 2], [5, 2, 1, 4], [2, 1]));
 
 //*Convert HTML Entities
