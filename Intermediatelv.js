@@ -82,3 +82,60 @@ function sumFibs(num) {
 }
 
 console.log(sumFibs(10));
+
+/*
+*Steamroller
+Flatten a nested array. You must account for varying levels of nesting.*/
+
+function steamrollArray(arr) {
+  const flattenedArray = [];
+  // Loop over array contents
+  for (let i = 0; i < arr.length; i++) {
+    if (Array.isArray(arr[i])) {
+      // Recursively flatten entries that are arrays
+      //  and push into the flattenedArray
+      flattenedArray.push(...steamrollArray(arr[i]));
+    } else {
+      // Copy contents that are not arrays
+      flattenedArray.push(arr[i]);
+    }
+  }
+  return flattenedArray;
+}
+console.log(steamrollArray([1, [2], [3, [[4]]]]));
+
+function steamrollArray2(arr) {
+  const flat = [].concat(...arr);
+  return flat.some(Array.isArray) ? steamrollArray(flat) : flat;
+}
+
+console.log(steamrollArray2([1, [2], [3, [[4]]]]));
+/*Code Explanation
+Use spread operator to concatenate each element of arr with an empty array
+Use Array.some() method to find out if the new array contains an array still
+If it does, use recursion to call steamrollArray again, passing in the new array to repeat the process on the arrays that were deeply nested
+If it does not, return the flattened array */
+
+//*Binary Agents
+//Return an English translated sentence of the passed binary string.
+
+function binaryAgent(str) {
+  var biString = str.split(" ");
+  var uniString = [];
+
+  /*using the radix (or base) parameter in parseInt, we can convert the binary
+      number to a decimal number while simultaneously converting to a char*/
+
+  for (var i = 0; i < biString.length; i++) {
+    uniString.push(String.fromCharCode(parseInt(biString[i], 2)));
+  }
+
+  // we then simply join the string
+  return uniString.join("");
+}
+
+console.log(
+  binaryAgent(
+    "01000001 01110010 01100101 01101110 00100111 01110100 00100000 01100010 01101111 01101110 01100110 01101001 01110010 01100101 01110011 00100000 01100110 01110101 01101110 00100001 00111111"
+  )
+);
