@@ -159,3 +159,83 @@ First we use split() to be able to work on each character as an Array element
 Then use map() to process each element from binary to decimal using pareseInt()
 Last we can use String.fromCharCode() to convert each ASCII number into the corresponding character
 However fromCharCode() expects a series of numbers rather than an Array! We can use ES6 Spread Operator to pass in an Array of numbers as individual numbers. See here for more info; Spread Operator 18 */
+
+/*
+*Everything Be True
+Check if the predicate (second argument) is truthy on all elements of a collection (first argument).
+
+In other words, you are given an array collection of objects. The predicate pre will be an object property and you need to return true if its value is truthy. Otherwise, return false. */
+
+function truthCheck(collection, pre) {
+  return collection.every(
+    (element) => element.hasOwnProperty(pre) && Boolean(element[pre])
+  );
+}
+
+//#region tests
+truthCheck(
+  [
+    { name: "Quincy", role: "Founder", isBot: false },
+    { name: "Naomi", role: "", isBot: false },
+    { name: "Camperbot", role: "Bot", isBot: true },
+  ],
+  "role"
+);
+
+truthCheck(
+  [
+    { name: "Quincy", role: "Founder", isBot: false },
+    { name: "Naomi", role: "", isBot: false },
+    { name: "Camperbot", role: "Bot", isBot: true },
+  ],
+  "isBot"
+);
+
+truthCheck(
+  [
+    { id: 1, data: { url: "https://freecodecamp.org", name: "freeCodeCamp" } },
+    {
+      id: 2,
+      data: { url: "https://coderadio.freecodecamp.org/", name: "CodeRadio" },
+    },
+    { id: null, data: {} },
+  ],
+  "id"
+);
+
+truthCheck(
+  [
+    { name: "Quincy", role: "Founder", isBot: false },
+    { name: "Naomi", role: "", isBot: false },
+    { name: "Camperbot", role: "Bot", isBot: true },
+  ],
+  "name"
+);
+
+truthCheck(
+  [
+    { name: "freeCodeCamp", users: [{ name: "Quincy" }, { name: "Naomi" }] },
+    { name: "Code Radio", users: [{ name: "Camperbot" }] },
+    { name: "", users: [] },
+  ],
+  "users"
+);
+//#endregion
+
+/*
+?code Explanation
+Do not use a Boolean object to convert a non-boolean value to a boolean value. To perform this task, instead, use Boolean as a function, or a double NOT operator:
+
+const x = Boolean(expression);     // use this...
+const x = !!(expression);          // ...or this
+const x = new Boolean(expression); // don't use this!
+
+The value passed as the first parameter is converted to a boolean value, if necessary. If the value is omitted or is 0, -0, null, false, NaN, undefined, or the empty string (""), the object has an initial value of false. All other values, including any object, an empty array ([]), or the string "false", create an object with an initial value of true.
+*/
+
+//!2nd best way
+//?https://frontend.turing.edu/lessons/module-1/js-truthy-falsy-expressions.html#:~:text=Vocabulary&text=Truthy%20values%20In%20JavaScript%2C%20a,encountered%20in%20a%20Boolean%20context.
+function truthCheck2(collection, pre) {
+  // Is everyone being true?
+  return collection.every((obj) => obj[pre]);
+}
