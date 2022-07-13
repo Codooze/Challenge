@@ -239,3 +239,31 @@ function truthCheck2(collection, pre) {
   // Is everyone being true?
   return collection.every((obj) => obj[pre]);
 }
+
+//!Understanding curried funtions
+function curried(x) {
+  return (y) => x + y;
+}
+console.log(curried(2)(3));
+
+/*
+*Arguments Optional
+Create a function that sums two arguments together. If only one argument is provided, then return a function that expects one argument and returns the sum.
+
+For example, addTogether(2, 3) should return 5, and addTogether(2) should return a function.
+*/
+
+function addTogether() {
+  const [first, second] = arguments;
+  if (typeof first !== "number") return undefined;
+  if (second === undefined) return (second) => addTogether(first, second);
+  if (typeof second !== "number") return undefined;
+  return first + second;
+}
+
+console.log(addTogether(2, 3)); // 5
+console.log(addTogether()); // undefined
+console.log(addTogether(3)(2)); // 5
+console.log(addTogether(2)([3])); //undefined
+console.log(addTogether(2, "3")); //undefined
+console.log(addTogether("2", 3)); //undefined
