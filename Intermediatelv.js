@@ -267,3 +267,37 @@ console.log(addTogether(3)(2)); // 5
 console.log(addTogether(2)([3])); //undefined
 console.log(addTogether(2, "3")); //undefined
 console.log(addTogether("2", 3)); //undefined
+
+/*
+*Make a Person
+Fill in the object constructor with the following methods below:
+
+getFirstName()
+getLastName()
+getFullName()
+setFirstName(first)
+setLastName(last)
+setFullName(firstAndLast)
+*/
+
+const Person = function (firstAndLast) {
+  this.getFullName = function () {
+    return firstAndLast;
+  };
+  this.getFirstName = () => firstAndLast.split(" ")[0];
+  this.getLastName = () => firstAndLast.split(" ")[1];
+  this.setFirstName = (first) => {
+    firstAndLast = first + " " + firstAndLast.split(" ")[1];
+  };
+  this.setLastName = (last) => {
+    firstAndLast = firstAndLast.split(" ")[0] + " " + last;
+  };
+  this.setFullName = (name) => {
+    firstAndLast = name;
+  };
+};
+
+const bob = new Person("Bob Ross");
+bob.getFullName();
+console.log(bob.setFirstName("naruto"));
+console.log(bob.getFirstName());
